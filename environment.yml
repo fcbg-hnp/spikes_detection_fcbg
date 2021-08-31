@@ -3,10 +3,9 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.7.6=h90870a6_5_cpython
-  - python_abi=3.7=1_cp37m
   - pip:
     - antropy==0.1.4
+    - colorlogs==14.0
     - imbalanced-learn==0.8.0
     - joblib==0.15.1
     - mne==0.22.0

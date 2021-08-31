@@ -45,10 +45,11 @@ def parse_main(cp):
         n_jobs = int(n_jobs)
 
     method = cp.get('MAIN', 'method')
-    if method not in ['naive', 'var1_svm', 'var1_abdt', 'full_pipeline_svm']:
+    if method not in ['naive', 'var1_svm', 'var1_tkeo_svm', 'var1_abdt', 'full_pipeline_svm']:
         raise ValueError(f"`method` parameter in [MAIN] has unknown value: {method}")
 
-    ext = cp.get('MAIN', 'extension')
+    # ext = cp.get('MAIN', 'extension')
+    ext = 'sef'
     check_extension(ext)
 
     return {
@@ -68,7 +69,8 @@ def parse_data(cp):
 
     mkdir(save_path)
 
-    ext = cp.get('MAIN', 'extension')
+    # ext = cp.get('MAIN', 'extension')
+    ext = 'sef'
     check_extension(ext)
     check_if_mrk_exist(data_path, save_path, ext)
 

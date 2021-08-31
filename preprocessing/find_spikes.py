@@ -30,9 +30,8 @@ def prepare_labels_raws(ground_truth_raws_list, configs, return_stims=True):
         new_stims.append(prepare_labels_raw(raw.copy(), configs))
     if return_stims:
         return new_stims
-    return convert_to_raws([raw.get_data(picks='eeg').T for raw in ground_truth_raws_list], new_stims,
-                           sfreq_=configs['sfreq'], stdtize=False, post_skew_align=False,
-                           save_path_=None, data_path=None)
+    return convert_to_raws([raw.get_data(picks='eeg') for raw in ground_truth_raws_list], new_stims,
+                           sfreq=configs['sfreq'])
 
 
 def find_spikes_raw(raw, labels_arr, configs):

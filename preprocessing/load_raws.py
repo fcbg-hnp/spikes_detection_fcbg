@@ -13,7 +13,7 @@ Supports .sef and .fif files containing EEG signal.
 """
 
 
-def read_raw_sef(path, seizures=False):
+def read_raw_sef(path, artefacts):
     """
     Reads file with format .sef, and returns a mne.io.Raw object containing
     the data. Reads events from the .mrk file with at the same location with a name <file_name>.sef.mrk.
@@ -21,16 +21,16 @@ def read_raw_sef(path, seizures=False):
     Only limited amount of events is supported and will be recognized in .mrk file (in this exact spelling):
     "focal", "Sz", "Sz. end".
     Taken from github:fcbg-hnp/mnelab/mnelab/utils/read.py.
-    :param seizures: If True, searches for .mrk with seizures events (in a format <file_name>_seizure.mrk) and adds
+    :param artefacts: If True, searches for .mrk with seizures events (in a format <file_name>_seizure.mrk) and adds
     seizures events. If seizures are not found then 'Seizures are not found' will be displayed.
-    :type seizures: bool
+    :type artefacts: bool
     :param path: full path to the .sef file
     :type path: str
     :return: Raw
     :rtype: mne.io.RawArray
     """
-    if not isinstance(seizures, bool):
-        raise ValueError(f'Expected boolean for `seizures` variable, got {type(seizures)}')
+    if not isinstance(artefacts, bool):
+        raise ValueError(f'Expected boolean for `seizures` variable, got {type(artefacts)}')
 
     def make_events(file_name):
         events_label = {
@@ -112,7 +112,7 @@ def read_raw_sef(path, seizures=False):
 
     # seisures events
     seizures_file = path[:-4] + '_exclude.mrk'
-    if seizures and os.path.exists(seizures_file):
+    if artefacts and os.path.exists(seizures_file):
         seizures_events = make_events(seizures_file)
         raw.add_events(seizures_events, stim_channel='STI', replace=False)
     else:
@@ -120,14 +120,13 @@ def read_raw_sef(path, seizures=False):
     return raw
 
 
-def load_raws_from_dir(data_path, file_ext='fif', seizures=False):
+def load_raws_from_dir(data_path, file_ext, artefacts):
     """
     Load all raws (mne.io.Raw) from files at the location that have specific file extension. Raws are preloaded.
     :param file_ext: Extensions of the files with raws. Supported 'fif', 'sef'.
     :type file_ext: 'fif' or 'sef'.
-    :param seizures: For .sef files only. If True, searches for .mrk with seizures events
-    (in a format <file_name>_seizure.mrk) and adds
-    seizures events. If seizures are not found then 'Seizures are not found' will be displayed.
+    :param artefacts: For .sef files only. If True, searches for .mrk with artefacts and siezures events
+    (in a format <file_name>_exclude.mrk) and adds these events.
     :param data_path: Path to the directory with raws.
     :return: List of Raws. length of list = number of files in directory.
     :rtype: list of mne.io.Raw or mne.io.RawArray.
@@ -136,6 +135,6 @@ def load_raws_from_dir(data_path, file_ext='fif', seizures=False):
     if file_ext == 'fif':
         return [mne.io.read_raw_fif(fn, preload=True) for fn in get_files_paths(data_path, file_ext)]
     elif file_ext == 'sef':
-        return [read_raw_sef(fn, seizures) for fn in get_files_paths(data_path, file_ext)]
+        return [read_raw_sef(fn, artefacts) for fn in get_files_paths(data_path, file_ext)]
     else:
         raise ValueError(file_ext + ' is not supported. Use .fif or .sef instead.')

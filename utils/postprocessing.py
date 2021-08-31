@@ -33,6 +33,6 @@ def generate_mrk_from_stim(stim_pred_list, sfreq_init_list, configs):
         with open(os.path.join(configs['save_path'], "", mrk_name), 'w') as f:
             f.write('TL02\n')
             for ts in np.where(stim_pred[0] == 1)[0]:
-                f.write(f'{int(sfreq_init*ts/sfreq)}\t{int(sfreq_init*ts/sfreq)}\t"focal"\n')
+                f.write(f'{int(sfreq_init*ts/sfreq)}\t{int(sfreq_init*ts/sfreq)}\tfocal\n')
     print('.mrk files were generated')
     return True

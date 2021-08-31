@@ -43,6 +43,8 @@ def extract_time_feat(X):
 
     Xf = X.copy()
 
+    simplefilter('ignore', category=RuntimeWarning)
+
     t_feat = np.empty((Xf.shape[0], Xf.shape[1], 14))
 
     # stat moments of epochs
@@ -69,6 +71,8 @@ def extract_time_feat(X):
     t_feat[:, :, 12] = mobility(Xf)
     t_feat[:, :, 13] = complexity(Xf)
 
+    resetwarnings()
+
     return t_feat
 
 
@@ -82,6 +86,8 @@ def extract_freq_feat(X, sfreq):
     :return: Array with freq features. Shape (n_epochs, n_channels, len(freq_bands)).
     :rtype: numpy.ndarray
     """
+
+    simplefilter('ignore', category=RuntimeWarning)
 
     freq_bands = [(0.1, 3.5), (3.5, 8), (8, 12), (12, 15), (15, 18), (18, 30)]
     n_bands = len(freq_bands)
@@ -102,6 +108,8 @@ def extract_freq_feat(X, sfreq):
     # f_feat[:, :, n_bands + 1] = np.percentile(Xdct, 90, overwrite_input=False)
     f_feat[:, :, n_bands + 1] = np.percentile(Xdct, 95, overwrite_input=False)
     del Xdct
+
+    resetwarnings()
 
     return f_feat
 
@@ -127,9 +135,11 @@ def exctact_information_features(X, sfreq, svd_order=3, svd_delay=1, svd_norm=Tr
     :rtype: numpy.ndarray
     """
     def process(x_):
+        simplefilter('ignore', category=RuntimeWarning)
         svde = []
         for i_ch in range(X.shape[1]):
             svde.append(np.expand_dims(svd_entropy(x_[i_ch], svd_order, svd_delay, normalize=svd_norm), axis=0))
+        resetwarnings()
         return np.concatenate(svde, axis=0)
 
     inf_feat = np.empty((X.shape[0], X.shape[1], 2))
@@ -151,6 +161,7 @@ def extract_dwt_feat(X, n_jobs=-2):
     """
     def get_statistics(dwt):
         # dwt if a list of 1D arrays with different shapes
+        simplefilter('ignore', category=RuntimeWarning)
         dwt_stats = []
         levels = len(dwt)
         for k, d in enumerate(dwt[:4]):
@@ -162,6 +173,7 @@ def extract_dwt_feat(X, n_jobs=-2):
             elif k == levels - 1:
                 stat.append(np.mean(np.abs(d)) / (np.mean(np.abs(dwt[k - 1])) + stat[0]))
             dwt_stats.append(stat)
+        resetwarnings()
         return np.array(dwt_stats)
 
     def wavedec_(signal):

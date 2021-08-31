@@ -185,16 +185,29 @@ def get_high_variance_channels(raws, n_channels):
     return raws_mod
 
 
+def add_tkeo_channels_to_raws(raws, n_jobs):
+    raws_mod = [raw.copy() for raw in raws]
+    tkeo = TKEO_channels(raws, n_jobs=n_jobs)
+    tkeo = [tkeo_ch.copy().rename_channels(dict(
+        zip(
+            tkeo_ch.ch_names, list(map(lambda x: 'tkeo_' + x, tkeo_ch.ch_names))
+            )
+        )) for tkeo_ch in tkeo]
+    raws_mod = [raw.add_channels([tkeo_ch]) for raw, tkeo_ch in zip(raws_mod, tkeo)]
+    return raws_mod
+
+
 def simple_preprocessing_pipeline(raws_list, sfreq=250., bp_filter=(2, 35), n_jobs=None):
     raws = resample_if_needed(raws_list, sfreq, n_jobs=n_jobs)
     raws = filter_if_needed(raws, bp_filter, n_jobs=n_jobs)
     return raws
 
 
-def common_preprocessing_pipeline(raws_list, sfreq=250., bp_filter=(2, 35), n_jobs=None):
+def common_preprocessing_pipeline(raws_list, sfreq=250., bp_filter=(2, 35), add_tkeo=False, n_jobs=None):
     raws = resample_if_needed(raws_list, sfreq, n_jobs=n_jobs)
     raws = filter_if_needed(raws, bp_filter, n_jobs=n_jobs)
     raws = get_high_variance_channels(raws, n_channels=1)
     raws = polarity_alignment_channels(raws, type='skew', n_jobs=n_jobs)
     raws = standardize_channels(raws, n_jobs=n_jobs)
+    raws = add_tkeo_channels_to_raws(raws, n_jobs)
     return raws

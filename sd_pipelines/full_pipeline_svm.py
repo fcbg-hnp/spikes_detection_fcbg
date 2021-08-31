@@ -36,11 +36,9 @@ def preprocessing(raws_list, n_jobs, _sfreq=250., _bp=(2., 35.)):
     # apply pca
     raws_data = [pca.transform(r_data) for r_data in raws_data]
     raws_data = [np.concatenate([r_data,
-                                 tkeo_pca.transform(tkeo_data[i_r])], axis=-1) for i_r, r_data in enumerate(raws_data)]
+                                 tkeo_pca.transform(tkeo_data[i_r])], axis=-1).T for i_r, r_data in enumerate(raws_data)]
     # convert to raws
-    raws_list_mod = convert_to_raws(save_path_=None,
-                                    data_path=None, raws_tr=raws_data, sti=stim_data, sfreq_=_sfreq,
-                                    stdtize=False, post_skew_align=False, n_jobs=n_jobs)
+    raws_list_mod = convert_to_raws(raws_tr=raws_data, stims=stim_data, sfreq=_sfreq)
     return standardize_channels(raws_list_mod, n_jobs=n_jobs)
 
 

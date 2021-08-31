@@ -44,4 +44,7 @@ def compute_features(X, feat_set, configs, reshape=True):
         # features shape : (n_epochs, n_channels, n_feat)
         Xf.append(features_functions[setting](**param))
 
-    return reshape_if_needed(np.concatenate(Xf, axis=-1), reshape)
+    Xf = np.concatenate(Xf, axis=-1)
+    Xf = np.nan_to_num(Xf, nan=0.)
+
+    return reshape_if_needed(Xf, reshape)
