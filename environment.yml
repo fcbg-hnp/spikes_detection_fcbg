@@ -5,7 +5,7 @@ channels:
 dependencies:
   - pip:
     - antropy==0.1.4
-    - colorlogs==14.0
+    - coloredlogs==14.0
     - imbalanced-learn==0.8.0
     - joblib==0.15.1
     - mne==0.22.0
