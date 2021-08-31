@@ -45,8 +45,13 @@ Python libraries:
 - [coloredlogs](https://pypi.org/project/coloredlogs/#installation "Colorlogs") == 14.0
 
 [comment]: <> (- pandas == 1.0.3)
-To satisfy all the requirements simply install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html "Conda installation")
-and then create a conda environment from `environment.yml` file by running in conda terminal:
+To satisfy all the requirements:
+1. Install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html "Conda installation")
+2. Open a Conda Terminal and clone the following repository using command:
+```commandline
+$ git clone https://github.com/NataliiaMolch/spikes_detection_fcbg.git
+```
+3. Finally, create a conda environment from `environment.yml` file by running in conda terminal:
 
 ```
 $ cd spikes_detection_fcbg/
@@ -66,7 +71,7 @@ $ conda env create -f environment.yml
 
 ## Usage
 
-First, make sure that all the requirements are satisfied/ there exit an appropriate conda environment.
+First, make sure that all the requirements are satisfied (use the instructions above).
 
 Before running program for spikes detection add configurations to `config.ini` file (can be opened with any text editor).
 Make sure that MAIN and DATA configurations are up to date.

@@ -1,10 +1,6 @@
 import numpy as np
 from sklearn.metrics import hinge_loss
 from sklearn.model_selection import train_test_split
-# try:
-#     from ..utils.parse_configuration_file import varname
-# except ValueError or ImportError:
-#     from utils.parse_configuration_file import varname
 from utils.parse_configuration_file import varname
 
 

@@ -1,22 +1,13 @@
 import joblib
 import os
 
-try:
-    from ..preprocessing.raws_transforms import *
-    from ..preprocessing.convert_to_raws import convert_to_raws
-    from ..preprocessing.make_epochs import get_epochs, get_spikes_epochs
-    from ..preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
-    from ..preprocessing.features_construction.features_computation import compute_features
-    from ..utils import suppress_stdout
-    from .svm_partial_fit import svm_partial_fit
-except ValueError:
-    from preprocessing.raws_transforms import *
-    from preprocessing.convert_to_raws import convert_to_raws
-    from preprocessing.make_epochs import get_epochs
-    from preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
-    from preprocessing.features_construction.features_computation import compute_features
-    from utils import suppress_stdout
-    from svm_partial_fit import svm_partial_fit
+from preprocessing.raws_transforms import *
+from preprocessing.convert_to_raws import convert_to_raws
+from preprocessing.make_epochs import get_epochs
+from preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
+from preprocessing.features_construction.features_computation import compute_features
+from utils import suppress_stdout
+from svm_partial_fit import svm_partial_fit
 
 
 def preprocessing(raws_list, n_jobs, _sfreq=250., _bp=(2., 35.)):

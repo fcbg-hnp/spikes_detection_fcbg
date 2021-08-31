@@ -5,8 +5,8 @@ from mne.io import RawArray
 from mne import create_info
 import struct
 import warnings
-# from ..utils import get_files_paths, get_files_names
 from utils import get_files_paths
+
 """
 Module that defines functions to load EEG signal to mne.io.Raw class.
 Supports .sef and .fif files containing EEG signal.

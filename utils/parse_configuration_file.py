@@ -2,8 +2,6 @@ import os
 from configparser import ConfigParser
 import inspect
 import re
-# from ..utils import mkdir
-# from ..utils.postprocessing import check_if_mrk_exist
 from utils.file_management import mkdir
 from utils.postprocessing import check_if_mrk_exist
 

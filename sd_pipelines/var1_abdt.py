@@ -1,17 +1,11 @@
 import joblib
 import os
-try:
-    from ..preprocessing.raws_transforms import common_preprocessing_pipeline, simple_preprocessing_pipeline
-    from ..preprocessing.make_epochs import get_epochs
-    from ..preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
-    from ..preprocessing.features_construction.features_computation import compute_features
-    from ..utils import suppress_stdout
-except ValueError:
-    from preprocessing.raws_transforms import common_preprocessing_pipeline, simple_preprocessing_pipeline
-    from preprocessing.make_epochs import get_epochs
-    from preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
-    from preprocessing.features_construction.features_computation import compute_features
-    from utils import suppress_stdout
+
+from preprocessing.raws_transforms import common_preprocessing_pipeline, simple_preprocessing_pipeline
+from preprocessing.make_epochs import get_epochs
+from preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
+from preprocessing.features_construction.features_computation import compute_features
+from utils import suppress_stdout
 
 
 def predict(raws_list, configs, features_configs):

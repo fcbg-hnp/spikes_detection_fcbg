@@ -1,18 +1,10 @@
-import joblib
-import os
 import numpy as np
 from sklearn.base import BaseEstimator
 
-try:
-    from ..preprocessing.raws_transforms import common_preprocessing_pipeline, simple_preprocessing_pipeline
-    from ..preprocessing.make_epochs import get_epochs
-    from ..preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
-    from ..utils import suppress_stdout
-except ValueError:
-    from preprocessing.raws_transforms import common_preprocessing_pipeline, simple_preprocessing_pipeline
-    from preprocessing.make_epochs import get_epochs
-    from preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
-    from utils import suppress_stdout
+from preprocessing.raws_transforms import common_preprocessing_pipeline, simple_preprocessing_pipeline
+from preprocessing.make_epochs import get_epochs
+from preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
+from utils import suppress_stdout
 
 
 class NaiveClassifier(BaseEstimator):

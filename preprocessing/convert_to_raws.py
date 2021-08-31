@@ -1,7 +1,6 @@
 import mne
 from mne.io import RawArray
 import numpy as np
-# from ..utils import get_files_names, suppress_stdout
 from utils import suppress_stdout
 
 

@@ -2,7 +2,7 @@ import numpy as np
 import os
 from scipy.interpolate import interp1d
 from convert_to_raws import *
-from utils.file_management import get_files_names, get_files_paths
+from utils.file_management import get_files_paths
 
 
 def interpolate_bads(raw):
