@@ -45,8 +45,8 @@ Python libraries:
 - [coloredlogs](https://pypi.org/project/coloredlogs/#installation "Colorlogs") == 14.0
 
 [comment]: <> (- pandas == 1.0.3)
-To satisfy all the requirments simply install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html "Conda installation")
-and then create a conda environment from  `environment.yml` file by running in conda terminal:
+To satisfy all the requirements simply install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html "Conda installation")
+and then create a conda environment from `environment.yml` file by running in conda terminal:
 
 ```
 $ cd spikes_detection_fcbg/
