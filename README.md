@@ -1,7 +1,7 @@
 # spikes_detection_fcbg
 Four pipelines for automatic epileptic spikes detection
 
-### Pipelines description ###
+### Pipelines description
 
 All pipelines imply simple preprocessing, such as resampling to 250 Hz and filtering from 2 to 35 Hz.
 
