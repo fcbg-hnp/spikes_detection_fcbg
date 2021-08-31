@@ -5,6 +5,8 @@ from mne.io import RawArray
 from mne import create_info
 import struct
 import warnings
+import logging, coloredlogs
+coloredlogs.install()
 from utils import get_files_paths
 
 """
@@ -46,7 +48,7 @@ def read_raw_sef(path, artefacts):
             'Art.end': 3
         }
         if not os.path.exists(file_name):
-            warnings.warn('No file {} found. Returned None.'.format(os.path.basename(file_name)))
+            logging.warning('No file {} found. Returned None.'.format(os.path.basename(file_name)))
             return None
         new_ev = []
         seizures_count = 1
@@ -116,7 +118,7 @@ def read_raw_sef(path, artefacts):
         seizures_events = make_events(seizures_file)
         raw.add_events(seizures_events, stim_channel='STI', replace=False)
     else:
-        warnings.warn('No regions of recording were excluded from evaluation. Note that if artifacts are present correct spikes detection can not be guarantied.')
+        logging.warning('No regions of recording were excluded from evaluation. Note that if artifacts are present correct spikes detection can not be guarantied.')
     return raw
 
 

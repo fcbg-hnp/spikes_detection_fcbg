@@ -30,8 +30,8 @@ Only applicable for 16 channel EEG recordings. Tested with only one particular m
 
 ## Requirements
 
-Tools:
 - [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html "Conda installation")
+- python==3.7
 
 Python libraries:
 - [mne](https://mne.tools/stable/install/mne_python.html "MNE") == 0.22.0

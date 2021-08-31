@@ -1,4 +1,5 @@
-import os
+import os, sys
+from contextlib import contextmanager
 import pickle
 
 """
@@ -51,3 +52,15 @@ def get_files_names(data_path, file_ext):
         if file[-len(file_ext):] != file_ext:
             specific_files.remove(file)
     return specific_files
+
+
+@contextmanager
+def suppress_stdout():
+    """ Suppress the output of some function """
+    with open(os.devnull, "w") as devnull:
+        old_stdout = sys.stdout
+        sys.stdout = devnull
+        try:
+            yield
+        finally:
+            sys.stdout = old_stdout

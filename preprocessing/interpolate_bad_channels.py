@@ -1,8 +1,9 @@
-import numpy as np
 import os
 from scipy.interpolate import interp1d
-from convert_to_raws import *
+from .convert_to_raws import *
 from utils.file_management import get_files_paths
+import logging, coloredlogs
+coloredlogs.install()
 
 
 def interpolate_bads(raw):
@@ -63,6 +64,6 @@ def read_bads_n_interpolate(raws_list, data_path, extension):
             # linear interpolation of bad channels
             raws_mod.append(interpolate_bads(raw))
         else:
-            print(raw_path[:-4] + '_bads.txt does not exist')
+            logging.warning(raw_path[:-4] + '_bads.txt does not exist. Skipping bad channels interpolation.')
             raws_mod.append(raw)
     return raws_mod

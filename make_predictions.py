@@ -1,8 +1,7 @@
 from preprocessing import load_raws_from_dir
-from utils import parse_config_file, print_message
+from utils import parse_config_file
 from sd_pipelines import naive, var1_svm, var1_tkeo_svm, var1_abdt, full_pipeline_svm
 from utils.postprocessing import generate_mrk_from_stim
-from utils import suppress_stdout
 from preprocessing.artefacts_removal import *
 from preprocessing.interpolate_bad_channels import read_bads_n_interpolate
 import coloredlogs, logging
@@ -67,4 +66,4 @@ if __name__ == '__main__':
     # convert stim to .mrk
     logging.info('Making .mrk files')
     if generate_mrk_from_stim(stim_pred_list, init_sfreq_list, configs):
-        print_message('Finished', 'subsection')
+        logging.info('Finished')
