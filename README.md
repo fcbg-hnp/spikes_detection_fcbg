@@ -19,11 +19,11 @@ Computes 44 features for each epoch and uses AdaBoost for classification.
 Yields the best detection of spikes within seizures, however, can lead to increased false positives.
 
 _RECOMMENDED_ **TKEO + SVM (`var1_tkeo_svm`):**
-Operates only on the channel with the highest variance. Adds a channel obtained through applying Teager-Kaiser Nonlinear Operator on channel with highest variance. 
+Operates only on the channel with the highest variance. Adds a channel obtained through applying Teager-Kaiser Nonlinear Operator (TKEO) on the channel with the highest variance. 
 Computes 44 x 2 channels = 88 features for each epoch and uses Support Vector Machines for classification.
 
 **Full pipeline (`full_pipeline_svm`):**
-Aggregates information from all 16 channel using Principal components analysis (PCA). Adds a channel obtained through applying Teager-Kaiser Nonlinear Operator (TKEO) and PCA. 
+Aggregates information from all 16 channel using Principal components analysis (PCA). Adds a channel obtained through applying Teager-Kaiser Nonlinear Operator and PCA. 
 Computes 44 x 2 channels = 88 features for each epoch and uses Support Vector Machines for classification.
 Only applicable for 16 channel EEG recordings. Tested with only one particular montage, PCA maybe montage dependent.
 
@@ -116,10 +116,23 @@ TL02
 
 ### Program execution
 
-Use conda terminal to run the program:
+Use Conda terminal to run the program:
 
 ```commandline
  $ cd spikes_detection_fcbg/
  $ conda activate spikes_detection
  $ python make_predictions.py
+```
+
+When working from Linux terminal instead of the last can simply install a custom terminal command by running the following lines only once:
+
+```commandline
+$ cd spikes_detection_fcbg/
+$ source .run_make_predictions.sh
+```
+
+Further, to execute spikes detection program simply run from `spikes_detection_fcbg/` folder:
+
+```commandline
+$ make_predictions
 ```
