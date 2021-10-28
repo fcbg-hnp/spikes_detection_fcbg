@@ -208,5 +208,6 @@ def common_preprocessing_pipeline(raws_list, sfreq=250., bp_filter=(2, 35), add_
     raws = get_high_variance_channels(raws, n_channels=1)
     raws = polarity_alignment_channels(raws, type='skew', n_jobs=n_jobs)
     raws = standardize_channels(raws, n_jobs=n_jobs)
-    raws = add_tkeo_channels_to_raws(raws, n_jobs)
+    if add_tkeo:
+        raws = add_tkeo_channels_to_raws(raws, n_jobs)
     return raws

@@ -83,13 +83,9 @@ def find_spikes_raw(raw, labels_arr, configs):
         spikes_events = np.delete(spikes_events, ind, axis=0)
 
     spikes_events_pred = spikes_events[np.where(spikes_events[:, 2] == 1)].astype(int)
-    # to_delete = []
-    # for i_ev, event in enumerate(spikes_events_pred[::-1]):
-    #     time1 = event[0]
-    #     spikes_events_pred[-(i_ev+1)][0] = time1 - spread + np.argmax(high_var_data[0, time1 - spread: time1 + spread + 1])
-    #     if skew(high_var_data[0, time1 - spread: time1 + spread + 1]) <= 0:
-    #         to_delete.append(len(spikes_events_pred) - 1 - i_ev)
-    # spikes_events_pred = np.delete(spikes_events_pred, np.array(to_delete, dtype=int), axis=0)
+    # for i_ev, event in enumerate(spikes_events_pred[:-1]):
+    #     time1 = spikes_events_pred[i_ev][0]
+    #     spikes_events_pred[i_ev][0] = time1 - spread + np.argmax(high_var_data[0, time1 - spread: time1 + spread + 1])
     # remove similar
     # spikes_events = spikes_events_pred[:-1]
 

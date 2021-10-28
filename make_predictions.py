@@ -1,27 +1,24 @@
 from preprocessing import load_raws_from_dir
 from utils import parse_config_file
-from sd_pipelines import naive, var1_svm, var1_tkeo_svm, var1_abdt, full_pipeline_svm
+from sd_pipelines import naive, var1_svm, var1_abdt
 from utils.postprocessing import generate_mrk_from_stim
 from preprocessing.artefacts_removal import *
 from preprocessing.interpolate_bad_channels import read_bads_n_interpolate
 import coloredlogs, logging
+import pickle
 coloredlogs.install()
 
 
 methods_dict = {
     'naive': naive.predict,
     'var1_svm': var1_svm.predict,
-    'var1_tkeo_svm': var1_tkeo_svm.predict,
     'var1_abdt': var1_abdt.predict,
-    'full_pipeline_svm': full_pipeline_svm.predict
 }
 
 partial_fit_methods_dict = {
     'naive': naive.predict,
     'var1_svm': var1_svm.refit_svm_and_predict,
-    'var1_tkeo_svm': var1_tkeo_svm.refit_svm_and_predict,
     'var1_abdt': var1_abdt.predict,
-    'full_pipeline_svm': full_pipeline_svm.refit_svm_and_predict
 }
 
 
@@ -43,7 +40,7 @@ if __name__ == '__main__':
         'time_params': dict(),
         'freq_params': {'sfreq': configs['sfreq']},
         'information_params': {'sfreq': configs['sfreq'], 'n_jobs': configs['n_jobs']},
-        'dwt_params': {'n_jobs': configs['n_jobs']}
+        'dwt_params': dict()
     }
     # load_data
     logging.info('Loading data')
@@ -56,6 +53,7 @@ if __name__ == '__main__':
     # artifacts regions interpolation
     logging.info('Removing artifacts')
     raws_list = artefacts_removal(raws_list, configs)
+    pickle.dump(raws_list, open('/Users/nataliyamolchanova/Docs/EEG_BCI/new_predictions/tmp.pkl', 'wb'))
     # methods params
     logging.info('Detecting spikes')
     if configs['refit_svm']:

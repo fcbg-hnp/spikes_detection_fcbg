@@ -3,7 +3,7 @@ from .features_functions import *
 features_functions = {
     'time': extract_time_feat,
     'freq': extract_freq_feat,
-    'information': exctact_information_features,
+    'information': extract_information_feat,
     'dwt': extract_dwt_feat
 }
 
