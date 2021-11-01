@@ -5,6 +5,7 @@ from utils.postprocessing import generate_mrk_from_stim
 from preprocessing.artefacts_removal import *
 from preprocessing.interpolate_bad_channels import read_bads_n_interpolate
 import coloredlogs, logging
+import argparse
 import pickle
 coloredlogs.install()
 
@@ -33,8 +34,12 @@ def check_raws_sfreq(raws_list_):
 
 
 if __name__ == '__main__':
+    # get config pas
+    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('--config_path', type=str, default='config.ini', help="path to the config.ini file")
+    opt, _ = parser.parse_known_args()
     # parse config_file
-    configs = parse_config_file(file_path='config.ini')
+    configs = parse_config_file(file_path=opt.config_path)
     # features computation configurations
     features_configs = {
         'time_params': dict(),

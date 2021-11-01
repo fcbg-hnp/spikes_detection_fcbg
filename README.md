@@ -9,7 +9,7 @@ All pipelines imply simple preprocessing, such as resampling to 250 Hz and filte
 Operates only on the channel with the highest variance. Applies standardization to this channel and make classification by variance thresholding.
 Yields the highest rate of false positives.
 
-**Simple SVM (`var1_svm`):**
+**RECOMMENDED: Simple SVM (`var1_svm`):**
 Operates only on the channel with the highest variance. Applies standardization to this channel.
 Computes 44 features for each epoch and uses Support Vector Machines for classification.
 
@@ -54,13 +54,25 @@ To satisfy all the requirements:
 1. Install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html "Conda installation")
 2. Open a Conda Terminal and clone the following repository using command:
 ```commandline
-$ git clone https://github.com/NataliiaMolch/spikes_detection_fcbg.git
+git clone https://github.com/NataliiaMolch/spikes_detection_fcbg.git
 ```
-3. Finally, create a conda environment from `environment.yml` file by running in conda terminal:
+3. Finally, go to `spikes_detection/` directory and make a setup with one of two options:
 
+**Automatic setup (Linux):**
+```commandline
+cd spikes_detection_fcbg/
+python setup.py
 ```
-$ cd spikes_detection_fcbg/
-$ conda env create -f environment.yml
+
+OR
+
+**Manual setup (Linux):**
+```commandline
+cd spikes_detection_fcbg/
+conda env create -f environment.yml
+echo 'export PATH=$(pwd):$PATH' >>  ~/.bashrc
+source ~/.bashrc
+chmod u+x spikes_detection
 ```
 
 [comment]: <> (An environment with a name `spikes_detection` will be created.)
@@ -95,7 +107,7 @@ e1, e13
 
 ```
 
-Note that, "<recording_name>_bads.txt" file should be at the same location as "<recording_name>.sef" file.
+_Note_ that, "<recording_name>_bads.txt" file should be at the same location as "<recording_name>.sef" file.
 
 ### Excluding artifacts and/or seizures
 
@@ -121,23 +133,27 @@ TL02
 
 ### Program execution
 
-Use Conda terminal to run the program:
+Use terminal to run the program by either ways (prior modification of configuration file is needed):
 
+**Easy run:**
 ```commandline
- $ cd spikes_detection_fcbg/
- $ conda activate spikes_detection
- $ python make_predictions.py
+ cd spikes_detection_fcbg/
+ spikes_detection
+```
+_Note_ `spikes_detection` cmd has two optional options: `[-p] [-e]`
+Option `-p`: full path to configuration file with .ini extension.
+If `-p` option is not given, then searches for config.ini file in current working directory.
+Option `-e`: the name of the conda environment.
+If `-e` option is not given, then uses spikes_detection conda environment by default.
+
+OR 
+
+**The other way**
+```commandline
+cd spikes_detection_fcbg/
+conda activate spikes_detection
+python make_predictions.py
 ```
 
-When working from Linux terminal instead of the last can simply install a custom terminal command by running the following lines only once:
-
-```commandline
-$ cd spikes_detection_fcbg/
-$ source .run_make_predictions.sh
-```
-
-Further, to execute spikes detection program simply run from `spikes_detection_fcbg/` folder:
-
-```commandline
-$ make_predictions
-```
+_Note_ `make_predictions.py` has one argument `[--config_file]` - path to configuration file.
+If not given, searches for `config.ini` file in current working directory.
