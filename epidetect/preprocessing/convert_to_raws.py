@@ -1,6 +1,7 @@
 import mne
-from mne.io import RawArray
 import numpy as np
+from mne.io import RawArray
+
 from ..utils import suppress_stdout
 
 

@@ -1,6 +1,7 @@
+from collections import Counter
+
 import mne
 import numpy as np
-from collections import Counter
 
 """
 Module that defines functions used in the epochs creation from raws.

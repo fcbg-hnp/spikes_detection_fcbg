@@ -1,11 +1,12 @@
-from .convert_to_raws import *
-from scipy.interpolate import interp1d
-
 import mne
 import numpy as np
+from scipy.interpolate import interp1d
+
+from .convert_to_raws import convert_to_raws
+
 
 def artefacts_removal(raws, configs):
-    """ All the regions that were marked as artefacts - replace with linearly interpolated signal
+    """All the regions that were marked as artefacts - replace with linearly interpolated signal
     Interpolation between two points: beginning of an artifact anf the end of an artifact
     """
     def interpolate_artefact_region(x_, y_):

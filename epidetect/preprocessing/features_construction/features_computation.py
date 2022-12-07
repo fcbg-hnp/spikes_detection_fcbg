@@ -1,4 +1,11 @@
-from .features_functions import *
+import numpy as np
+
+from .features_functions import (
+    extract_dwt_feat,
+    extract_freq_feat,
+    extract_information_feat,
+    extract_time_feat,
+)
 
 features_functions = {
     'time': extract_time_feat,

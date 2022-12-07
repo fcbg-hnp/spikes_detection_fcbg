@@ -1,8 +1,12 @@
-import numpy as np
 import mne
-from .raws_transforms import get_high_variance_channels, polarity_alignment_channels
-from .convert_to_raws import convert_to_raws
+import numpy as np
 from scipy.stats import skew
+
+from .convert_to_raws import convert_to_raws
+from .raws_transforms import (
+    get_high_variance_channels,
+    polarity_alignment_channels,
+)
 
 
 def prepare_labels_raw(raw, configs):

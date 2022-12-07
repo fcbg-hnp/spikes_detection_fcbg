@@ -1,10 +1,13 @@
-import mne
+import logging
 import os
-import numpy as np
-from mne.io import RawArray
-from mne import create_info
 import struct
-import logging, coloredlogs
+
+import coloredlogs
+import mne
+import numpy as np
+from mne import create_info
+from mne.io import RawArray
+
 coloredlogs.install()
 from ..utils import get_files_paths
 

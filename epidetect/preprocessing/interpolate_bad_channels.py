@@ -1,8 +1,12 @@
+import logging
 import os
+
+import coloredlogs
 from scipy.interpolate import interp1d
-from .convert_to_raws import *
+
 from ..utils.file_management import get_files_paths
-import logging, coloredlogs
+from .convert_to_raws import convert_to_raw
+
 coloredlogs.install()
 
 import numpy as np

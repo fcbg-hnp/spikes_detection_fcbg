@@ -1,9 +1,15 @@
 import numpy as np
 from sklearn.base import BaseEstimator
 
-from ..preprocessing.raws_transforms import common_preprocessing_pipeline, simple_preprocessing_pipeline
+from ..preprocessing.find_spikes import (
+    add_events_from_labels,
+    prepare_labels_raws,
+)
 from ..preprocessing.make_epochs import get_epochs
-from ..preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
+from ..preprocessing.raws_transforms import (
+    common_preprocessing_pipeline,
+    simple_preprocessing_pipeline,
+)
 from ..utils import suppress_stdout
 
 

@@ -1,8 +1,8 @@
-import os
-from configparser import ConfigParser
 import inspect
+import os
 import re
-from .file_management import mkdir
+from configparser import ConfigParser
+
 from .postprocessing import check_if_mrk_exist
 
 
@@ -65,7 +65,7 @@ def parse_data(cp):
     if not os.path.exists(data_path):
         raise FileNotFoundError("`data_path` directory from MAIN does not exist.")
 
-    mkdir(save_path)
+    os.makedirs(save_path, exist_ok=True)
 
     # ext = cp.get('MAIN', 'extension')
     ext = 'sef'

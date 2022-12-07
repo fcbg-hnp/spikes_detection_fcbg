@@ -1,11 +1,10 @@
 import numpy as np
-from pywt import wavedec
-from warnings import simplefilter, resetwarnings
+from antropy import spectral_entropy, svd_entropy
 from joblib import Parallel, delayed
-from scipy.signal import butter, sosfilt
+from pywt import wavedec
 from scipy import stats
 from scipy.fft import dct
-from antropy import spectral_entropy, svd_entropy
+from scipy.signal import butter, sosfilt
 
 
 def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
@@ -17,19 +16,19 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
 
 
 def activity(epochs):
-    """ Compute Hjorth parameter: Activity"""
+    """Compute Hjorth parameter: Activity"""
     return np.var(epochs, axis=-1)
 
 
 def mobility(epochs):
-    """ Compute Hjorth parameter: Mobility """
+    """Compute Hjorth parameter: Mobility """
     return np.sqrt(
         np.var(np.gradient(epochs, axis=-1), axis=-1) / activity(epochs)
     )
 
 
 def complexity(epochs):
-    """ Compute Hjorth parameter: Complexity """
+    """Compute Hjorth parameter: Complexity """
     return mobility(np.gradient(epochs, axis=-1)) / mobility(epochs)
 
 

@@ -1,11 +1,20 @@
-import joblib
 import os
+
+import joblib
 import numpy as np
 
-from ..preprocessing.raws_transforms import common_preprocessing_pipeline, simple_preprocessing_pipeline
+from ..preprocessing.features_construction.features_computation import (
+    compute_features,
+)
+from ..preprocessing.find_spikes import (
+    add_events_from_labels,
+    prepare_labels_raws,
+)
 from ..preprocessing.make_epochs import get_epochs, get_spikes_epochs
-from ..preprocessing.find_spikes import add_events_from_labels, prepare_labels_raws
-from ..preprocessing.features_construction.features_computation import compute_features
+from ..preprocessing.raws_transforms import (
+    common_preprocessing_pipeline,
+    simple_preprocessing_pipeline,
+)
 from ..utils import suppress_stdout
 from .svm_partial_fit import svm_partial_fit
 

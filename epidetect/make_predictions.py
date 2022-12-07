@@ -1,12 +1,16 @@
-from .preprocessing import load_raws_from_dir
-from .utils import parse_config_file
-from .sd_pipelines import naive, var1_svm, var1_abdt
-from .utils.postprocessing import generate_mrk_from_stim
-from .preprocessing.artefacts_removal import *
-from .preprocessing.interpolate_bad_channels import read_bads_n_interpolate
-import coloredlogs, logging
 import argparse
+import logging
 import pickle
+
+import coloredlogs
+
+from .preprocessing import load_raws_from_dir
+from .preprocessing.artefacts_removal import artefacts_removal
+from .preprocessing.interpolate_bad_channels import read_bads_n_interpolate
+from .sd_pipelines import naive, var1_abdt, var1_svm
+from .utils import parse_config_file
+from .utils.postprocessing import generate_mrk_from_stim
+
 coloredlogs.install()
 
 
