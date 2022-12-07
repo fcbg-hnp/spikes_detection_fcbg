@@ -1,0 +1,141 @@
+[build-system]
+requires = ['setuptools >= 61.0.0']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'epidetect'
+version = '0.1.0'
+description = 'Automatic pipelines for.'
+readme = 'README.md'
+license = {file = 'LICENSE'}
+requires-python = '>=3.8'
+authors = [
+    {name = 'Nataliia Molchanova'},
+    {name = 'Mathieu Scheltienne', email = 'mathieu.scheltienne@fcbg.ch'},
+]
+maintainers = [
+    {name = 'Mathieu Scheltienne', email = 'mathieu.scheltienne@fcbg.ch'},
+]
+keywords = [
+    'python',
+    'epilepsy',
+    'spike',
+    'detection',
+]
+classifiers = [
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: Unix',
+    'Operating System :: MacOS',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Natural Language :: English',
+    'License :: OSI Approved :: MIT License',
+]
+dependencies = [
+    'antropy>=0.1.4',
+    'coloredlogs>=14.0',
+    'imbalanced-learn>=0.8.0',
+    'joblib>=0.15.1',
+    'mne>=0.22',
+    'numpy>=1.21',
+    'psutil',
+    'PyWavelets>=1.1.1',
+    'scikit-learn>=0.24.1',
+    'scipy>=1.4.1',
+
+]
+
+[project.optional-dependencies]
+build = [
+    'build',
+    'twine',
+]
+style = [
+    'bibclean',
+    'black',
+    'codespell',
+    'isort',
+    'flake8',
+    'pydocstyle[toml]',
+]
+test = [
+    'pytest',
+    'pytest-cov',
+]
+all = [
+    'epidetect[style]',
+    'epidetect[doc]',
+    'epidetect[test]',
+    'epidetect[build]',
+]
+full = [
+    'epidetect[all]',
+]
+
+[project.urls]
+homepage = 'https://github.com/fcbg-hnp/spikes_detection_fcbg'
+documentation = 'https://github.com/fcbg-hnp/spikes_detection_fcbg'
+source = 'https://github.com/fcbg-hnp/spikes_detection_fcbg'
+tracker = 'https://github.com/fcbg-hnp/spikes_detection_fcbg/issues'
+
+[project.scripts]
+epidetect-sys_info = 'epidetect.commands.sys_info:run'
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+include = ['epidetect*']
+exclude = ['epidetect*tests']
+
+[tool.black]
+line-length = 79
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+(
+      __pycache__
+    | \.github
+    | setup.py
+)
+'''
+
+[tool.isort]
+profile = 'black'
+multi_line_output = 3
+line_length = 79
+py_version = 38
+extend_skip_glob = [
+    'setup.py',
+]
+
+[tool.pydocstyle]
+convention = 'numpy'
+ignore-decorators = '(copy_doc|property|.*setter|.*getter|pyqtSlot|Slot)'
+match = '^(?!setup|__init__|test_).*\.py'
+match-dir = '^epidetect.*'
+add_ignore = 'D100,D104,D107'
+
+[tool.pytest.ini_options]
+minversion = '6.0'
+addopts = '--durations 20 --junit-xml=junit-results.xml --verbose'
+filterwarnings = []
+
+[tool.coverage.run]
+branch = true
+cover_pylib = false
+omit = [
+    '**/__init__.py',
+    '**/epidetect/_version.py',
+    '**/epidetect/commands/*',
+    '**/tests/**',
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    'pragma: no cover',
+    'if __name__ == .__main__.:',
+]
+precision = 2
